@@ -1,0 +1,56 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ATM Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="box1">
+      <div id="faceBox" class="webcam-container">
+        <h3>Face Verification</h3>
+        <video id="webcam" autoplay></video>
+        <button id="captureFace">Verify Face</button>
+      </div>
+    </div>
+    <div class="box2">
+      <h2>ATM Login</h2>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2920/2920072.png"
+        alt="Fingerprint"
+        class="fingerprint"
+        onclick="simulateBiometric()"
+      />
+      <p>Or login with PIN</p>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          name="pin"
+          id="pin"
+          placeholder="Enter PIN"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+
+      <p>Don't have an account?</p>
+      <button onclick="window.location.href='register.html'">
+        Register
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

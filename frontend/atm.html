@@ -1,0 +1,68 @@
+<!-- frontend/atm.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .profile { display: flex; gap: 20px; margin-bottom: 20px; }
+    .profile img { width: 120px; height: 120px; border-radius: 10px; object-fit: cover; }
+    .profile-info { font-size: 14px; }
+    .transactions { margin-top: 20px; }
+    .transactions table { width: 100%; border-collapse: collapse; }
+    .transactions th, .transactions td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="box2" style="margin-top: 30px;">
+    <h2>Welcome, <span id="atmUsername"></span></h2>
+
+    <div class="profile">
+      <img id="profilePic" src="" alt="User Photo">
+      <div class="profile-info" id="profileDetails">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <h3>Balance: $<span id="balance">0</span></h3>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <button onclick="deposit()">Deposit</button>
+    <button onclick="withdraw()">Withdraw</button>
+    <button onclick="showEditModal()">Edit Profile</button>
+    <button onclick="logout()">Logout</button>
+    
+
+
+    <div class="transactions">
+      <h3>Transaction History</h3>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Type</th><th>Amount</th></tr>
+        </thead>
+        <tbody id="transactionBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="editModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+background:rgba(0,0,0,0.6); align-items:center; justify-content:center; z-index:999;">
+  <div style="background:#fff; padding:20px; border-radius:10px; width:400px;">
+    <h3>Edit Profile</h3>
+    <form id="editForm">
+      <input type="text" name="full_name" placeholder="Full Name"><br>
+      <input type="email" name="email" placeholder="Email"><br>
+      <input type="tel" name="phone" placeholder="Phone"><br>
+      <input type="password" name="new_pin" placeholder="New PIN (optional)"><br>
+      <input type="password" name="old_pin" placeholder="Current PIN (required)" required><br>
+      <button type="submit">Save Changes</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>

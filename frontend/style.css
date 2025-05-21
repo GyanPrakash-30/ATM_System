@@ -1,0 +1,194 @@
+/* === Global Styles === */
+body {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Container === */
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+/* === Box1: Webcam Preview === */
+.box1 {
+  width: 40%;
+  height: 60vh;
+  background-color: aliceblue;
+  border-radius: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+              rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+/* === Face Verification Section === */
+.webcam-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.webcam-container h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+video#webcam {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 320px;
+  height: 240px;
+  margin-bottom: 10px;
+}
+
+#captureFace {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#captureFace:hover {
+  background-color: #218838;
+}
+
+/* === Box2: Login Panel === */
+.box2 {
+  background: #222;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+input, button {
+  width: 90%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background-color: #5a67d8;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #434190;
+}
+
+.fingerprint {
+  width: 80px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* === Box3: Registration / Profile Form === */
+.box3 {
+  margin: 0;
+  background: #222;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.box3 h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+#regForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  border: none;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.box3 button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: #0af;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.box3 button:hover {
+  background: #08c;
+}
+
+/* === Mobile Responsiveness === */
+@media (max-width: 600px) {
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .box1, .box2, .box3 {
+    width: 90%;
+    margin-bottom: 20px;
+    height: auto;
+  }
+}

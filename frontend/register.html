@@ -1,0 +1,75 @@
+<!-- frontend/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Register</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="box3">
+  <h2>Create Account</h2>
+  <form id="regForm" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td><label for="username">Username:</label></td>
+        <td><input type="text" name="username" id="username" required></td>
+      </tr>
+      <tr>
+        <td><label for="pin">4-digit PIN:</label></td>
+        <td><input type="password" name="pin" required></td>
+      </tr>
+      <tr>
+        <td><label for="full_name">Full Name:</label></td>
+        <td><input type="text" name="full_name" required></td>
+      </tr>
+      <tr>
+        <td><label for="sex">Gender:</label></td>
+        <td>
+          <select name="sex" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="dob">Date of Birth:</label></td>
+        <td><input type="date" name="dob" required></td>
+      </tr>
+      <tr>
+        <td><label for="email">Email:</label></td>
+        <td><input type="email" name="email" required></td>
+      </tr>
+      <tr>
+        <td><label for="phone">Phone Number:</label></td>
+        <td><input type="tel" name="phone" required></td>
+      </tr>
+      <tr>
+        <td><label for="account_no">Account Number:</label></td>
+        <td><input type="text" name="account_no" required></td>
+      </tr>
+      <tr>
+        <td><label for="account_type">Account Type:</label></td>
+        <td><input type="text" name="account_type" required></td>
+      </tr>
+      <tr>
+        <td><label for="bank_name">Bank Name:</label></td>
+        <td><input type="text" name="bank_name" required></td>
+      </tr>
+      <tr>
+        <td><label for="photo">Upload Photo:</label></td>
+        <td><input type="file" name="photo" accept="image/*" required></td>
+      </tr>
+    </table>
+
+    <div class="form-buttons">
+      <button type="submit">Register</button>
+      <button type="button" onclick="window.location.href='index.html'">Back to Login</button>
+    </div>
+  </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
