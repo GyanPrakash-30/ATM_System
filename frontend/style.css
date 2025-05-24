@@ -9,6 +9,8 @@ body {
   max-height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* === Container === */
@@ -23,9 +25,13 @@ body {
 
 /* === Box1: Webcam Preview === */
 .box1 {
-  width: 40%;
-  height: 60vh;
-  background-color: aliceblue;
+  width: 30%;
+  height: 50vh;
+  /* background-color: aliceblue; */
+  background-image: url("face-1.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   border-radius: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
               rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
@@ -37,20 +43,22 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
 }
 
 .webcam-container h3 {
   color: #333;
-  margin-bottom: 10px;
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 5px;
 }
 
-video#webcam {
-  border: 2px solid #ccc;
+video#webcam 
+{
   border-radius: 8px;
-  width: 320px;
-  height: 240px;
+  width: 400;
+  height: 550px;
   margin-bottom: 10px;
 }
 
@@ -58,6 +66,7 @@ video#webcam {
   padding: 8px 16px;
   background-color: #28a745;
   color: white;
+  font-size: 2em;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -73,13 +82,26 @@ video#webcam {
   background: #222;
   padding: 30px;
   border-radius: 10px;
-  width: 300px;
+  width: 35%px;
+  height: 50vh;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+.box2 h2 {
+  margin-bottom: 20px;
+  font-size: 3.5em;
+  color: #fff;
+}
+
+.box2 p {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #ddd;
+}
+
 input, button {
-  width: 90%;
+  width: 75%;
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
@@ -88,7 +110,10 @@ input, button {
 
 button {
   background-color: #5a67d8;
+  width: 75%;
   color: white;
+  font-size: 1.5em;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -98,20 +123,19 @@ button:hover {
 }
 
 .fingerprint {
-  width: 80px;
+  width: 170px;
   cursor: pointer;
   opacity: 0.8;
 }
 
 /* === Box3: Registration / Profile Form === */
 .box3 {
-  margin: 0;
+  margin: 20px;
   background: #222;
   padding: 30px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 600px;
-  height: 100vh;
+  border-radius: 30px;
+  width: 35%;
+  height: 90vh;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -119,14 +143,17 @@ button:hover {
 .box3 h2 {
   margin-bottom: 20px;
   text-align: center;
-  font-size: 24px;
+  font-size: 4em;
 }
 
 #regForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  /* border: none; */
 }
+
+
 
 .form-group {
   display: flex;
@@ -136,7 +163,7 @@ button:hover {
 .form-group label {
   margin-bottom: 5px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 2em;
   color: #ddd;
 }
 
@@ -144,7 +171,7 @@ button:hover {
 .form-group select {
   padding: 10px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 1.5em;
   outline: none;
   border: none;
 }
@@ -162,17 +189,159 @@ button:hover {
   background: #0af;
   color: white;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 2em;
+  font-style: bold;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 
 .box3 button:hover {
-  background: #08c;
+  background: rgb(0, 131, 197);
+}
+
+/* === ATM Dashboard Styles === */
+#leftPanel {
+  width: 30%;
+  height: 80vh;
+  background: #222;
+  padding: 30px 20px;
+  margin: 2.5%;
+  box-sizing: border-box;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  justify-content:baseline;
+  gap: 15px;
+}
+
+#leftPanel h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 5em;
+  font-weight: 700;
+}
+
+#leftPanel button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5a67d8;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#leftPanel button:hover {
+  background-color: #434190;
+}
+
+#rightPanel {
+  width: 65%;
+  height: 80vh;
+  background: #222;
+  padding: 30px;
+  margin: 2.5%;
+  border-radius: 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  box-shadow: inset 0 0 15px #111;
+  position: relative;
+  justify-items: center;
+  justify-content: center
+}
+
+.contentBox {
+  background: #333;
+  border-radius: 12px;
+  padding: 20px;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  max-width: 50%;
+  height: auto;
+  justify-items: center;
+  align-items: center;
+  overflow-y: auto;
+  font-size: 2em;
+}
+
+.profile-pic {
+  width: 170px;
+  height: 170px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 2px solid #666;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #222;
+  margin-top: 15px;
+  color: white;
+}
+
+th, td {
+  border: 1px solid #222;
+  padding: 10px;
+  text-align: center;
+}
+
+input, select {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.5em;
+  box-sizing: border-box;
+}
+
+label {
+  font-weight: 600;
+  font-size: 2em;
+  display: block;
+  margin-top: 10px;
+}
+
+.form-button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-button-group button {
+  flex: 1;
+  background-color: #5a67d8;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.4s;
+}
+.form-button-group button:hover {
+  background-color: #434190;
+}
+
+#rightPanel::-webkit-scrollbar {
+  width: 8px;
+}
+#rightPanel::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
 }
 
 /* === Mobile Responsiveness === */
 @media (max-width: 600px) {
   .form-buttons {
+    flex-direction: column;
+  }
+
+  body{
     flex-direction: column;
   }
 
@@ -190,5 +359,14 @@ button:hover {
     width: 90%;
     margin-bottom: 20px;
     height: auto;
+  }
+
+   #leftPanel, #rightPanel {
+    width: 100%;
+    height: 50vh;
+  }
+  #rightPanel {
+    box-shadow: none;
+    padding: 15px;
   }
 }

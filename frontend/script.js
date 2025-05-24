@@ -277,3 +277,241 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("Biometric login simulation (to be implemented)");
   };
 });
+
+
+// ATM Dashboard JavaScript
+// Handles rendering of views and actions for deposit, withdraw, profile, etc.
+
+const rightPanel = document.getElementById("rightPanel");
+const btnHome = document.getElementById("btnHome");
+const btnProfile = document.getElementById("btnProfile");
+const btnTransactions = document.getElementById("btnTransactions");
+const btnEditProfile = document.getElementById("btnEditProfile");
+const btnChangePin = document.getElementById("btnChangePin");
+const btnDeposit = document.getElementById("btnDeposit");
+const btnWithdraw = document.getElementById("btnWithdraw");
+const btnLogout = document.getElementById("btnLogout");
+
+let userData = null;
+
+async function fetchProfile() {
+  const username = localStorage.getItem("username");
+  if (!username) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5000/profile?username=${username}`);
+    if (!res.ok) throw new Error("Failed to load profile");
+    userData = await res.json();
+    return userData;
+  } catch (err) {
+    alert("Error loading profile: " + err.message);
+    return null;
+  }
+}
+
+function renderHome() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Welcome, ${userData.full_name}</h2>
+      <p><strong>Account Number:</strong> ${userData.account_no}</p>
+      <p><strong>Bank:</strong> ${userData.bank_name}</p>
+      <p><strong>Balance:</strong> $${userData.balance.toFixed(2)}</p>
+    </div>
+  `;
+}
+
+function renderProfile() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Profile Details</h2>
+      <img src="http://127.0.0.1:5000/static/uploads/${userData.photo}" class="profile-pic" />
+      <p><strong>Name:</strong> ${userData.full_name}</p>
+      <p><strong>Email:</strong> ${userData.email}</p>
+      <p><strong>Phone:</strong> ${userData.phone}</p>
+      <p><strong>Sex:</strong> ${userData.sex}</p>
+      <p><strong>DOB:</strong> ${userData.dob}</p>
+      <p><strong>Account Number:</strong> ${userData.account_no}</p>
+      <p><strong>Account Type:</strong> ${userData.account_type}</p>
+      <p><strong>Bank:</strong> ${userData.bank_name}</p>
+      <p><strong>Balance:</strong> $${userData.balance.toFixed(2)}</p>
+    </div>
+  `;
+}
+
+function renderTransactions() {
+  const transactions = userData.transactions || [];
+  let rows = transactions.slice().reverse().map(tx => `
+    <tr>
+      <td>${tx.date}</td>
+      <td>${tx.type}</td>
+      <td>$${tx.amount.toFixed(2)}</td>
+    </tr>
+  `).join("");
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Transaction History</h2>
+      <table>
+        <thead><tr><th>Date</th><th>Type</th><th>Amount</th></tr></thead>
+        <tbody>${rows || `<tr><td colspan="3">No transactions found.</td></tr>`}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderEditProfile() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm">
+        <label>Full Name</label>
+        <input type="text" name="full_name" value="${userData.full_name}" required />
+        <label>Email</label>
+        <input type="email" name="email" value="${userData.email}" required />
+        <label>Phone</label>
+        <input type="tel" name="phone" value="${userData.phone}" required />
+        <label>Sex</label>
+        <select name="sex" required>
+          <option value="Male" ${userData.sex === "Male" ? "selected" : ""}>Male</option>
+          <option value="Female" ${userData.sex === "Female" ? "selected" : ""}>Female</option>
+          <option value="Other" ${userData.sex === "Other" ? "selected" : ""}>Other</option>
+        </select>
+        <label>Date of Birth</label>
+        <input type="date" name="dob" value="${userData.dob}" required />
+        <div class="form-button-group">
+          <button type="submit">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.getElementById("editProfileForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append("username", userData.username);
+    const res = await fetch("http://127.0.0.1:5000/update-profile", {
+      method: "POST",
+      body: formData
+    });
+    const result = await res.json();
+    alert(result.message);
+    if (res.ok) {
+      userData = await fetchProfile();
+      renderProfile();
+    }
+  });
+}
+
+function renderChangePin() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Change PIN</h2>
+      <form id="changePinForm">
+        <label>Current PIN</label>
+        <input type="password" name="old_pin" required minlength="4" maxlength="4" pattern="\d{4}" />
+        <label>New PIN</label>
+        <input type="password" name="new_pin" required minlength="4" maxlength="4" pattern="\d{4}" />
+        <label>Confirm New PIN</label>
+        <input type="password" name="confirm_pin" required minlength="4" maxlength="4" pattern="\d{4}" />
+        <div class="form-button-group">
+          <button type="submit">Change PIN</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.getElementById("changePinForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const oldPin = e.target.old_pin.value.trim();
+    const newPin = e.target.new_pin.value.trim();
+    const confirmPin = e.target.confirm_pin.value.trim();
+    if (newPin !== confirmPin) return alert("New PINs do not match");
+    const res = await fetch("http://127.0.0.1:5000/change-pin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: userData.username, old_pin: oldPin, new_pin: newPin }),
+    });
+    const result = await res.json();
+    alert(result.message);
+    if (res.ok) e.target.reset();
+  });
+}
+
+function renderDeposit() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Deposit Money</h2>
+      <form id="depositForm">
+        <label>Enter Amount:</label>
+        <input type="number" id="depositAmount" required min="1" />
+        <div class="form-button-group">
+          <button type="submit">Deposit</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.getElementById("depositForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const amount = parseFloat(document.getElementById("depositAmount").value);
+    const res = await fetch("http://127.0.0.1:5000/deposit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: userData.username, amount }),
+    });
+    const result = await res.json();
+    alert(result.message);
+    if (res.ok) {
+      userData = await fetchProfile();
+      renderHome();
+    }
+  });
+}
+
+function renderWithdraw() {
+  rightPanel.innerHTML = `
+    <div class="contentBox">
+      <h2>Withdraw Money</h2>
+      <form id="withdrawForm">
+        <label>Enter Amount:</label>
+        <input type="number" id="withdrawAmount" required min="1" />
+        <div class="form-button-group">
+          <button type="submit">Withdraw</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.getElementById("withdrawForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const amount = parseFloat(document.getElementById("withdrawAmount").value);
+    const res = await fetch("http://127.0.0.1:5000/withdraw", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: userData.username, amount }),
+    });
+    const result = await res.json();
+    alert(result.message);
+    if (res.ok) {
+      userData = await fetchProfile();
+      renderHome();
+    }
+  });
+}
+
+function logout() {
+  localStorage.removeItem("username");
+  window.location.href = "index.html";
+}
+
+btnHome.addEventListener("click", renderHome);
+btnProfile.addEventListener("click", renderProfile);
+btnTransactions.addEventListener("click", renderTransactions);
+btnEditProfile.addEventListener("click", renderEditProfile);
+btnChangePin.addEventListener("click", renderChangePin);
+btnDeposit.addEventListener("click", renderDeposit);
+btnWithdraw.addEventListener("click", renderWithdraw);
+btnLogout.addEventListener("click", logout);
+
+(async function init() {
+  userData = await fetchProfile();
+  if (userData) renderHome();
+})();
