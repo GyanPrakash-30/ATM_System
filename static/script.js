@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const username = localStorage.getItem("username");
       if (!username) {
         alert("No username found. Please login again.");
-        return (window.location.href = "login.html");
+        return (window.location.href = "/login");
       }
 
       const canvas = document.createElement("canvas");
@@ -91,12 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "/atm";
         } else {
           localStorage.removeItem("username");
-          window.location.href = "login.html";
+          window.location.href = "/login";
         }
       } catch (err) {
         alert("Face verification error: " + err.message);
         localStorage.removeItem("username");
-        window.location.href = "login.html";
+        window.location.href = "/login";
       }
     });
   }
