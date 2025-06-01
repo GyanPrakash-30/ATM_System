@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form
+        class="form"
+        action="/signup"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <h2>Signup</h2>
+
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Full Name"
+          required
+        />
+        <span id="nameError" class="error"></span>
+
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          required
+        />
+        <span id="emailError" class="error"></span>
+
+        <input type="text" name="username" placeholder="Username" required />
+
+        <div class="password-wrapper">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <span
+            class="toggle-password"
+            onclick="togglePassword('password', this)"
+            >👁️</span
+          >
+        </div>
+        <small id="strengthMessage" style="color: white"></small>
+
+        <div class="upload-row">
+          <label for="Gender">Gender: </label>
+          <input type="radio" name="gender" value="male" required />Male
+          <input type="radio" name="gender" value="female" />Female
+          <input type="radio" name="gender" value="other" />Other
+        </div>
+
+        <input type="date" name="dob" required />
+        <span id="dobError" class="error"></span>
+        <input
+          type="tel"
+          name="phone"
+          id="phone"
+          placeholder="Phone Number"
+          required
+        />
+        <span id="phoneError" class="error"></span>
+
+        <textarea
+          name="address"
+          placeholder="Address"
+          rows="3"
+          required
+        ></textarea>
+        <input
+          type="text"
+          name="account_no"
+          placeholder="Account Number"
+          required
+        />
+        <span id="accountError" class="error"></span>
+        <select name="account_type" required>
+          <option value="">Select Account Type</option>
+          <option value="savings">Savings</option>
+          <option value="current">Current</option>
+          <option value="fixed">Fixed Deposit</option>
+        </select>
+        <input type="text" name="bank_name" placeholder="Bank Name" required />
+        
+        <div class="upload-row">
+          <label for="profile">Upload Photo:</label>
+          <input type="file" name="photo" id="photo" accept="image/*" />
+        </div>
+        
+        <button type="submit">Sign Up</button>
+        <p>
+          Already have an account?
+          <a href="/login" class="btn-1">Login</a>
+        </p>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstInput = document.querySelector("input");
+        if (firstInput) firstInput.focus();
+
+        document
+          .querySelector(".form")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              this.submit();
+            }
+          });
+      });
+    </script>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
