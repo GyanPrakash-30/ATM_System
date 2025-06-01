@@ -40,10 +40,15 @@ ATM_System/
 ├── database.db
 └── README.md
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b857078658c7cc6638c66cd5512b4f3f907a157
 ---
 
 ## 🛠️ Setup Instructions
 
+<<<<<<< HEAD
 # 1. Clone the repository
 
 git clone https://github.com/GyanPrakash-30/ATM_System.git
@@ -100,3 +105,60 @@ python app.py
 ![image](https://github.com/user-attachments/assets/c72809ad-ecf6-451d-92eb-589758912f1f)
 
 MIT License © 2025 Gyan Prakash
+=======
+  # 1. Clone the repository
+
+  git clone https://github.com/GyanPrakash-30/ATM_System.git
+  cd ATM_System
+
+  # 2. Create and activate virtual environment (optional but recommended)
+
+  python -m venv venv
+  source venv/bin/activate  # Windows: venv\Scripts\activate
+
+  # 3. Install dependencies
+
+  # ✅ Dependencies
+   -> Flask
+   -> Flask-Cors
+   -> Flask-SQLAlchemy
+   -> Werkzeug
+   -> Pillow
+   -> face_recognition
+   -> opencv-python
+   
+   pip install -r requirements.txt
+   
+  Or install manually if needed:
+    pip install flask flask_sqlalchemy flask_cors pillow opencv-python face_recognition
+    If face_recognition fails, install cmake and dlib first.
+
+### ▶️ Running the App
+   python app.py
+
+### 🧠 How It Works
+
+ 1. Signup: User registers with profile photo
+ 2. Login: User enters email & password
+ 3. Facebox: After successful login, user is redirected to webcam verification
+ 4. Face Match: Captured face is compared with stored image using face_recognition
+ 5. Success: User enters ATM dashboard with full access
+
+### Screenshots
+
+ # -📥 Login Page
+   ![image](https://github.com/user-attachments/assets/275d7d83-adbd-450c-b0b8-519f661e0dfc)
+
+ # -📸 Face Verification
+   ![image](https://github.com/user-attachments/assets/e29e3056-26bd-4b8e-8abe-0841e5e06618)
+
+# -🏦 ATM Dashboard
+  ![image](https://github.com/user-attachments/assets/c72809ad-ecf6-451d-92eb-589758912f1f)
+
+
+MIT License © 2025 Gyan Prakash
+
+  
+
+
+>>>>>>> 7b857078658c7cc6638c66cd5512b4f3f907a157
